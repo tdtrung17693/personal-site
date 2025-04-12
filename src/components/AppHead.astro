@@ -1,0 +1,21 @@
+---
+import { getConfig } from "../lib/utils";
+
+const title = getConfig("site.title");
+const description = getConfig("site.description");
+const siteUrl = getConfig("site.url");
+---
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="generator" content={Astro.generator} />
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+
+  <link rel="canonical" href={siteUrl} />
+
+  <!-- Add favicon, open graph tags, etc. based on your needs -->
+</head>
+

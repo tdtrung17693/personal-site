@@ -1,0 +1,20 @@
+---
+import "@/styles/global.css";
+import "@/styles/terminal.css";
+import { getConfig } from "@/lib/utils";
+import AppLayout from "@/layouts/AppLayout.vue";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{getConfig("site.title")}</title>
+  </head>
+  <body class="text-text font-mono min-h-screen bg-base">
+    <AppLayout client:only>
+      <slot />
+    </AppLayout>
+  </body>
+</html>

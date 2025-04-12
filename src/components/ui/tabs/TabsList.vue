@@ -1,0 +1,22 @@
+<script setup lang="ts">
+import { cn } from '@/lib/utils'
+import { TabsList, type TabsListProps } from 'reka-ui'
+import { computed, type HTMLAttributes } from 'vue'
+
+const props = defineProps<TabsListProps & { class?: HTMLAttributes['class'] }>()
+
+const delegatedProps = computed(() => {
+  const { class: _, ...delegated } = props
+
+  return delegated
+})
+</script>
+
+<template>
+  <TabsList data-slot="tabs-list" v-bind="delegatedProps" :class="cn(
+    'inline-flex h-10 items-center justify-center rounded-md bg-surface/50 p-1 text-subtle',
+    props.class,
+  )">
+    <slot />
+  </TabsList>
+</template>

@@ -1,0 +1,12 @@
+---
+import "../styles/global.css";
+// Component Imports
+import PageHome from "@/components/pages/PageHome.vue";
+import PageLayout from "@/layouts/page.astro";
+// Full Astro Component Syntax:
+// https://docs.astro.build/basics/astro-components/
+---
+
+<PageLayout>
+  <PageHome client:visible />
+</PageLayout>

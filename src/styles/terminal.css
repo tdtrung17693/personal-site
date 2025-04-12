@@ -1,0 +1,138 @@
+.terminal-output a:hover {
+  text-decoration: underline;
+}
+
+.terminal-output pre {
+  margin: 1rem 0;
+}
+
+.terminal-output h1,
+.terminal-output h2 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.terminal-output p {
+  margin-bottom: 1rem;
+}
+
+/* Glow markdown styling */
+.glow-markdown.prose {
+  --tw-prose-bold: hsl(var(--text));
+  --tw-prose-links: hsl(var(--foam) / 0.8);
+  --tw-prose-link-hover: hsl(var(--foam));
+  --tw-prose-code: hsl(var(--foam));
+  --tw-prose-code-bg: hsl(var(--surface));
+  --tw-prose-code-inline: hsl(var(--foam));
+  --tw-prose-code-inline-bg: hsl(var(--surface));
+  --tw-prose-code-block: hsl(var(--foam));
+  --tw-prose-body: hsl(var(--text) / 0.8);
+  --tw-prose-headings: hsl(var(--text));
+}
+
+.prose pre {
+  background-color: hsl(var(--surface));
+  border-radius: 0.25rem;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  border-left: 2px solid hsl(var(--foam));
+}
+
+.prose code {
+  background-color: hsl(var(--surface));
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.prose h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--primary-foreground);
+  padding-bottom: 0.25rem;
+}
+
+.prose h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose h3 {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose p {
+  margin-bottom: 1rem;
+}
+
+.prose ul,
+.prose ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.prose th {
+  background-color: hsl(var(--surface));
+  border: 1px solid hsl(var(--muted));
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.prose td {
+  border: 1px solid hsl(var(--muted));
+  padding: 0.5rem;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--primary-foreground);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: var(--muted);
+}
+
+.prose hr {
+  border: 0;
+  border-top: 1px dashed var(--primary-foreground);
+  margin: 1rem 0;
+}
+
+.prose a {
+  text-decoration: none;
+  border-bottom: 1px dashed hsl(var(--foam) / 0.8);
+}
+
+.prose a:hover {
+  color: var(--tw-prose-link-hover);
+  border-bottom: 1px dashed hsl(var(--foam));
+  text-decoration: none;
+}
+
+.prose img {
+  max-width: 100%;
+  border: 1px solid var(--muted);
+  border-radius: 0.25rem;
+}

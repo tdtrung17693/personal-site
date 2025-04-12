@@ -1,0 +1,827 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+@config "../../tailwind.config.js";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-surface: hsl(var(--surface));
+  --color-rose: hsl(var(--rose));
+  --color-foam: hsl(var(--foam));
+  --color-pine: hsl(var(--pine));
+  --color-iris: hsl(var(--iris));
+  --color-gold: hsl(var(--gold));
+  --color-love: hsl(var(--love));
+  --color-text: hsl(var(--text));
+  --color-subtle: hsl(var(--subtle));
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-mono: var(--font-jetbrains-mono);
+  --color-block-background: hsl(var(--surface) / 0.5);
+}
+
+:root {
+  /* Rosé Pine Dawn (Light) */
+  --base: 32 57% 95%; /* #faf4ed - Background */
+  --surface: 35 100% 98%; /* #fffaf3 - Elevated elements */
+  --overlay: 33 43% 91%; /* #f2e9e1 - Overlays */
+  --muted-rosepine: 257 9% 61%; /* #9893a5 - Muted text */
+  --subtle: 248 12% 52%; /* #797593 - Subtle text */
+  --text: 248 19% 40%; /* #575279 - Primary text */
+  --love: 343 35% 55%; /* #b4637a - Love/Red */
+  --gold: 35 81% 56%; /* #ea9d34 - Gold/Yellow */
+  --rose: 3 53% 67%; /* #d7827e - Rose/Pink */
+  --pine: 197 53% 34%; /* #286983 - Pine/Teal */
+  --foam: 189 30% 48%; /* #56949f - Foam/Cyan */
+  --iris: 268 21% 57%; /* #907aa9 - Iris/Purple */
+  --highlight-low: 33 43% 91%; /* #f2e9e1 - Subtle highlight (more authentic to Rosé Pine Dawn) */
+  --highlight-med: 25 35% 93%; /* #f4ede8 - Medium highlight */
+  --highlight-high: 10 9% 86%; /* #dfdad9 - High highlight */
+
+  /* shadcn/ui */
+  --background: hsl(var(--base));
+  --foreground: hsl(var(--text));
+  --card: hsl(var(--surface));
+  --card-foreground: hsl(var(--text));
+  --popover: hsl(var(--surface));
+  --popover-foreground: hsl(var(--text));
+  --primary: hsl(var(--foam));
+  --primary-foreground: hsl(var(--text));
+  --secondary: hsl(var(--muted));
+  --secondary-foreground: hsl(var(--text));
+  --muted: hsl(var(--muted-rosepine));
+  --muted-foreground: hsl(var(--subtle));
+  --accent: hsl(var(--pine));
+  --accent-foreground: hsl(var(--text));
+  --destructive: hsl(var(--love));
+  --destructive-foreground: hsl(var(--text));
+  --border: hsl(var(--highlight-low));
+  --input: hsl(var(--highlight-low));
+  --ring: hsl(var(--highlight-med));
+  --chart-1: hsl(var(--love));
+  --chart-2: hsl(var(--pine));
+  --chart-3: hsl(var(--foam));
+  --chart-4: hsl(var(--gold));
+  --chart-5: hsl(var(--iris));
+  --radius: 0.625rem;
+  --sidebar: hsl(var(--surface));
+  --sidebar-foreground: hsl(var(--text));
+  --sidebar-primary: hsl(var(--foam));
+  --sidebar-primary-foreground: hsl(var(--text));
+  --sidebar-accent: hsl(var(--highlight-low));
+  --sidebar-accent-foreground: hsl(var(--text));
+  --sidebar-border: hsl(var(--highlight-low));
+  --sidebar-ring: hsl(var(--highlight-med));
+}
+
+.dark {
+  --base: 249 22% 12%; /* #191724 - Background */
+  --surface: 247 23% 15%; /* #1f1d2e - Elevated elements */
+  --overlay: 248 25% 18%; /* #26233a - Overlays */
+  --muted-rosepine: 249 12% 47%; /* #6e6a86 - Muted text */
+  --subtle: 248 15% 61%; /* #908caa - Subtle text */
+  --text: 245 50% 91%; /* #e0def4 - Primary text */
+  --love: 343 76% 68%; /* #eb6f92 - Love/Red */
+  --gold: 35 88% 72%; /* #f6c177 - Gold/Yellow */
+  --rose: 2 55% 83%; /* #ebbcba - Rose/Pink */
+  --pine: 197 49% 38%; /* #31748f - Pine/Teal */
+  --foam: 189 43% 73%; /* #9ccfd8 - Foam/Cyan */
+  --iris: 267 57% 78%; /* #c4a7e7 - Iris/Purple */
+  --highlight-low: 244 18% 15%; /* #21202e - Subtle highlight */
+  --highlight-med: 249 15% 28%; /* #403d52 - Medium highlight */
+  --highlight-high: 248 13% 36%; /* #524f67 - High highlight */
+}
+
+@layer base {
+}
+
+@custom-variant dark (&:is(.dark *));
+
+.dark .astro-code,
+.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  /* Optional, if you also want font styles */
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+/* Rosé Pine Theme Colors - Official Values */
+
+.light-theme {
+  /* Rosé Pine Dawn (Light) */
+  --base: 32 57% 95%; /* #faf4ed - Background */
+  --surface: 35 100% 98%; /* #fffaf3 - Elevated elements */
+  --overlay: 33 43% 91%; /* #f2e9e1 - Overlays */
+  --muted: 257 9% 61%; /* #9893a5 - Muted text */
+  --subtle: 248 12% 52%; /* #797593 - Subtle text */
+  --text: 248 19% 40%; /* #575279 - Primary text */
+  --love: 343 35% 55%; /* #b4637a - Love/Red */
+  --gold: 35 81% 56%; /* #ea9d34 - Gold/Yellow */
+  --rose: 3 53% 67%; /* #d7827e - Rose/Pink */
+  --pine: 197 53% 34%; /* #286983 - Pine/Teal */
+  --foam: 189 30% 48%; /* #56949f - Foam/Cyan */
+  --iris: 268 21% 57%; /* #907aa9 - Iris/Purple */
+  --highlight-low: 33 43% 91%; /* #f2e9e1 - Subtle highlight (more authentic to Rosé Pine Dawn) */
+  --highlight-med: 25 35% 93%; /* #f4ede8 - Medium highlight */
+  --highlight-high: 10 9% 86%; /* #dfdad9 - High highlight */
+}
+
+.dark-theme {
+  /* Rosé Pine (Dark) */
+  --base: 249 22% 12%; /* #191724 - Background */
+  --surface: 247 23% 15%; /* #1f1d2e - Elevated elements */
+  --overlay: 248 25% 18%; /* #26233a - Overlays */
+  --muted: 249 12% 47%; /* #6e6a86 - Muted text */
+  --subtle: 248 15% 61%; /* #908caa - Subtle text */
+  --text: 245 50% 91%; /* #e0def4 - Primary text */
+  --love: 343 76% 68%; /* #eb6f92 - Love/Red */
+  --gold: 35 88% 72%; /* #f6c177 - Gold/Yellow */
+  --rose: 2 55% 83%; /* #ebbcba - Rose/Pink */
+  --pine: 197 49% 38%; /* #31748f - Pine/Teal */
+  --foam: 189 43% 73%; /* #9ccfd8 - Foam/Cyan */
+  --iris: 267 57% 78%; /* #c4a7e7 - Iris/Purple */
+  --highlight-low: 244 18% 15%; /* #21202e - Subtle highlight */
+  --highlight-med: 249 15% 28%; /* #403d52 - Medium highlight */
+  --highlight-high: 248 13% 36%; /* #524f67 - High highlight */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewport='0 0 8 8' style='fill:white;'><rect width='8' height='8'/></svg>")
+      4 4,
+    auto;
+}
+
+.light-theme body {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewport='0 0 8 8' style='fill:black;'><rect width='8' height='8'/></svg>")
+      4 4,
+    auto;
+}
+
+a,
+button {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewport='0 0 8 8' style='fill:%239ccfd8;'><rect width='8' height='8'/></svg>")
+      4 4,
+    auto;
+}
+
+::selection {
+  background-color: hsl(var(--foam));
+  color: hsl(var(--base));
+}
+
+/* Terminal-style scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--surface));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--foam));
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--pine));
+}
+
+/* Blinking cursor animation */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Animation delay utilities */
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+
+/* Theme toggle animation - with proper crescent moon */
+.theme-toggle-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: hsl(var(--text));
+}
+
+/* Theme icon base styles */
+.theme-icon {
+  overflow: visible;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Sun circle animation */
+.sun-circle {
+  fill: currentColor;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.is-moon .sun-circle {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.is-sun .sun-circle {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Moon crescent animation */
+.moon-crescent {
+  fill: currentColor;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-origin: center;
+}
+
+.is-sun .moon-crescent {
+  opacity: 0;
+  transform: scale(0) rotate(45deg);
+}
+
+.is-moon .moon-crescent {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* Sun rays with staggered animation */
+.sun-ray {
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  transform-origin: center;
+  transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.is-moon .sun-ray {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.is-sun:hover .sun-ray {
+  transform: scale(1.2);
+}
+.is-sun .sun-ray {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Staggered animation for rays when going from moon to sun */
+.is-sun .ray-0 {
+  transition-delay: 0.05s;
+}
+
+.is-sun .ray-1 {
+  transition-delay: 0.1s;
+  animation-delay: 0.1s;
+}
+
+.is-sun .ray-2 {
+  transition-delay: 0.15s;
+  animation-delay: 0.15s;
+}
+
+.is-sun .ray-3 {
+  transition-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+.is-sun .ray-4 {
+  transition-delay: 0.25s;
+  animation-delay: 0.25s;
+}
+
+.is-sun .ray-5 {
+  transition-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+
+.is-sun .ray-6 {
+  transition-delay: 0.35s;
+  animation-delay: 0.35s;
+}
+
+.is-sun .ray-7 {
+  transition-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+/* Terminal output styling */
+/* Theme-specific styles */
+.rose-pine-bg {
+  background-color: hsl(var(--base));
+}
+
+.rose-pine-surface {
+  background-color: hsl(var(--surface));
+}
+
+.rose-pine-overlay {
+  background-color: hsl(var(--overlay));
+}
+
+.rose-pine-text {
+  color: hsl(var(--text));
+}
+
+.rose-pine-subtle {
+  color: hsl(var(--subtle));
+}
+
+.rose-pine-muted {
+  color: hsl(var(--muted));
+}
+
+.rose-pine-foam {
+  color: hsl(var(--foam));
+}
+
+.rose-pine-pine {
+  color: hsl(var(--pine));
+}
+
+.rose-pine-rose {
+  color: hsl(var(--rose));
+}
+
+.rose-pine-love {
+  color: hsl(var(--love));
+}
+
+.rose-pine-gold {
+  color: hsl(var(--gold));
+}
+
+.rose-pine-iris {
+  color: hsl(var(--iris));
+}
+
+.rose-pine-highlight-low {
+  background-color: hsl(var(--highlight-low));
+}
+
+.rose-pine-highlight-med {
+  background-color: hsl(var(--highlight-med));
+}
+
+.rose-pine-highlight-high {
+  background-color: hsl(var(--highlight-high));
+}
+
+.rose-pine-border {
+  border-color: hsl(var(--muted) / 0.2);
+}
+
+.rose-pine-border-med {
+  border-color: hsl(var(--highlight-med));
+}
+
+.rose-pine-border-high {
+  border-color: hsl(var(--highlight-high));
+}
+
+/* Jump target styles */
+.jump-target-label {
+  position: absolute;
+  background-color: hsl(var(--foam));
+  color: hsl(var(--base));
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-size: 12px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.jump-target-focused {
+  outline: 2px solid hsl(var(--foam)) !important;
+  outline-offset: 2px;
+}
+
+/* Utility classes for Rosé Pine */
+.bg-base {
+  background-color: hsl(var(--base));
+}
+.bg-surface {
+  background-color: hsl(var(--surface));
+}
+.bg-overlay {
+  background-color: hsl(var(--overlay));
+}
+.bg-highlight-low {
+  background-color: hsl(var(--highlight-low));
+}
+.bg-highlight-med {
+  background-color: hsl(var(--highlight-med));
+}
+.bg-highlight-high {
+  background-color: hsl(var(--highlight-high));
+}
+.bg-love {
+  background-color: hsl(var(--love));
+}
+.bg-gold {
+  background-color: hsl(var(--gold));
+}
+.bg-rose {
+  background-color: hsl(var(--rose));
+}
+.bg-pine {
+  background-color: hsl(var(--pine));
+}
+.bg-foam {
+  background-color: hsl(var(--foam));
+}
+.bg-iris {
+  background-color: hsl(var(--iris));
+}
+
+.border-highlight-low {
+  border-color: hsl(var(--muted) / 0.2);
+}
+.border-highlight-med {
+  border-color: hsl(var(--highlight-med));
+}
+.border-highlight-high {
+  border-color: hsl(var(--highlight-high));
+}
+.border-foam {
+  border-color: hsl(var(--foam));
+}
+.border-pine {
+  border-color: hsl(var(--pine));
+}
+.border-rose {
+  border-color: hsl(var(--rose));
+}
+.border-gold {
+  border-color: hsl(var(--gold));
+}
+.border-iris {
+  border-color: hsl(var(--iris));
+}
+
+/* Add a default border color class that uses muted */
+.border-muted {
+  border-color: hsl(var(--muted) / 0.2);
+}
+
+/* Update all border utility classes to use muted by default */
+
+.hover\:text-foam:hover {
+  color: hsl(var(--foam));
+}
+.hover\:text-pine:hover {
+  color: hsl(var(--pine));
+}
+.hover\:text-rose:hover {
+  color: hsl(var(--rose));
+}
+.hover\:text-love:hover {
+  color: hsl(var(--love));
+}
+.hover\:text-gold:hover {
+  color: hsl(var(--gold));
+}
+.hover\:text-iris:hover {
+  color: hsl(var(--iris));
+}
+
+.hover\:bg-highlight-low:hover {
+  background-color: hsl(var(--highlight-low));
+}
+.hover\:bg-highlight-med:hover {
+  background-color: hsl(var(--highlight-med));
+}
+
+/* Update hover styles to only change background, not border */
+.hover\:border-highlight-med:hover {
+  /* Remove this property to prevent border color change on hover */
+}
+
+.hover\:border-highlight-high:hover {
+  /* Remove this property to prevent border color change on hover */
+}
+
+.hover\:border-foam:hover {
+  /* Remove this property to prevent border color change on hover */
+}
+
+/* Add background hover styles to replace border hover styles */
+.hover\:bg-surface:hover {
+  background-color: hsl(var(--surface));
+}
+
+.hover\:border-foam:hover {
+  /* Remove this property to prevent border color change on hover */
+}
+.hover\:border-highlight-med:hover {
+  border-color: hsl(var(--highlight-med));
+}
+.hover\:border-highlight-high:hover {
+  border-color: hsl(var(--highlight-high));
+}
+
+/* Replace all hsla instances with hsl slash syntax */
+
+/* Opacity variants */
+.bg-overlay\/50 {
+  background-color: hsl(var(--overlay) / 0.5);
+}
+.bg-surface\/50 {
+  background-color: hsl(var(--surface) / 0.5);
+}
+.bg-surface\/80 {
+  background-color: hsl(var(--surface) / 0.8);
+}
+.border-foam\/20 {
+  border-color: hsl(var(--foam) / 0.2);
+}
+.border-foam\/30 {
+  border-color: hsl(var(--foam) / 0.3);
+}
+.border-foam\/40 {
+  border-color: hsl(var(--foam) / 0.4);
+}
+
+/* Add a slightly darker surface background for hover effects */
+.hover\:bg-surface\/70:hover {
+  background-color: hsl(var(--surface) / 0.7);
+}
+
+/* Add a deeper background hover effect for blog posts */
+.hover\:bg-overlay\/30:hover {
+  background-color: hsl(var(--overlay) / 0.3);
+}
+
+/* Card and UI element styles inspired by Rosé Pine website */
+.card {
+  border: 1px solid hsl(var(--muted) / 0.2);
+  background-color: hsl(var(--surface) / 0.5);
+  border-radius: 0.125rem;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+.card:hover {
+  /* Remove border color change on hover, only change background */
+  background-color: hsl(var(--surface) / 0.8);
+}
+
+.card-header {
+  border-bottom: 1px solid hsl(var(--highlight-low));
+  padding: 1rem;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-footer {
+  border-top: 1px solid hsl(var(--highlight-low));
+  padding: 1rem;
+}
+
+/* Button styles inspired by Rosé Pine website */
+.btn {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  border-radius: 0.125rem;
+  border: 1px solid hsl(var(--muted) / 0.2);
+  background-color: hsl(var(--surface));
+  color: hsl(var(--text));
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+.btn:hover {
+  /* Remove border color change on hover, only change background */
+  background-color: hsl(var(--surface) / 0.8);
+}
+
+.btn-primary {
+  border-color: hsl(var(--foam) / 0.3);
+  color: hsl(var(--foam));
+}
+.btn-primary:hover {
+  border-color: hsl(var(--foam));
+}
+
+.btn-secondary {
+  border-color: hsl(var(--iris) / 0.3);
+  color: hsl(var(--iris));
+}
+.btn-secondary:hover {
+  border-color: hsl(var(--iris));
+}
+
+.btn-accent {
+  border-color: hsl(var(--rose) / 0.3);
+  color: hsl(var(--rose));
+}
+.btn-accent:hover {
+  border-color: hsl(var(--rose));
+}
+
+/* Badge styles inspired by btop terminal */
+.badge {
+  padding-left: 0.375rem;
+  padding-right: 0.375rem;
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  border-radius: 0.125rem;
+}
+
+.badge-foam {
+  background-color: hsl(var(--foam) / 0.1);
+  color: hsl(var(--foam));
+}
+
+.badge-gold {
+  background-color: hsl(var(--gold) / 0.1);
+  color: hsl(var(--gold));
+}
+
+.badge-rose {
+  background-color: hsl(var(--rose) / 0.1);
+  color: hsl(var(--rose));
+}
+
+.badge-iris {
+  background-color: hsl(var(--iris) / 0.1);
+  color: hsl(var(--iris));
+}
+
+/* Terminal-inspired elements */
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-width: 1px;
+  border-color: hsl(var(--muted) / 0.2);
+  padding-bottom: 0.5rem;
+}
+
+.terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.terminal-dot {
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 9999px;
+}
+
+.terminal-dot-love {
+  background-color: hsl(var(--love));
+}
+
+.terminal-dot-gold {
+  background-color: hsl(var(--gold));
+}
+
+.terminal-dot-foam {
+  background-color: hsl(var(--foam));
+}
+
+.terminal-title {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: hsl(var(--subtle));
+}
+
+.terminal-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.terminal-action {
+  border-radius: 0.125rem;
+  border: 1px solid hsl(var(--muted) / 0.2);
+  background-color: hsl(var(--surface));
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: hsl(var(--subtle));
+}
+.terminal-action:hover {
+  color: hsl(var(--foam));
+}
+
+/* Progress bars inspired by btop */
+.progress-bar {
+  height: 0.5rem;
+  width: 100%;
+  overflow: hidden;
+  background-color: hsl(var(--highlight-low));
+}
+
+.progress-bar-foam {
+  background-color: hsl(var(--foam));
+}
+
+.progress-bar-gold {
+  background-color: hsl(var(--gold));
+}
+
+.progress-bar-rose {
+  background-color: hsl(var(--rose));
+}
+
+.progress-bar-iris {
+  background-color: hsl(var(--iris));
+}
+
+/* Dividers inspired by Rosé Pine website */
+.divider {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.divider-line {
+  height: 1px;
+  flex: 1 1 0%;
+  background-color: hsl(var(--highlight-low));
+}
+
+.divider-text {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: hsl(var(--subtle));
+}

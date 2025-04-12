@@ -1,0 +1,12 @@
+---
+import "../styles/global.css";
+import PageMe from "@/components/pages/PageMe.vue";
+import PageLayout from "@/layouts/page.astro";
+import ProfileMarkdown from "@/components/pages/profile.md";
+---
+
+<PageLayout>
+  <PageMe client:visible>
+    <ProfileMarkdown slot="terminal-output" />
+  </PageMe>
+</PageLayout>
