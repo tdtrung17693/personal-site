@@ -57,6 +57,7 @@
 }
 
 :root {
+  --font-jetbrains-mono: "JetBrains Mono Variable", monospace;
   /* Rosé Pine Dawn (Light) */
   --base: 32 57% 95%; /* #faf4ed - Background */
   --surface: 35 100% 98%; /* #fffaf3 - Elevated elements */
@@ -186,13 +187,13 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
+.dark body {
   cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewport='0 0 8 8' style='fill:white;'><rect width='8' height='8'/></svg>")
       4 4,
     auto;
 }
 
-.light-theme body {
+body {
   cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewport='0 0 8 8' style='fill:black;'><rect width='8' height='8'/></svg>")
       4 4,
     auto;
@@ -617,7 +618,7 @@ button {
 /* Card and UI element styles inspired by Rosé Pine website */
 .card {
   border: 1px solid hsl(var(--muted) / 0.2);
-  background-color: hsl(var(--surface) / 0.5);
+  background-color: hsl(var(--surface));
   border-radius: 0.125rem;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -626,7 +627,6 @@ button {
 
 .card:hover {
   /* Remove border color change on hover, only change background */
-  background-color: hsl(var(--surface) / 0.8);
 }
 
 .card-header {

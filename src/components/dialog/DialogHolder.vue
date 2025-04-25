@@ -1,19 +1,29 @@
 <script setup lang="ts">
-import { provide, ref } from 'vue';
+import { onMounted, provide, ref } from 'vue';
 import { DIALOG_CONTEXT_KEY, type Dialog as DialogType } from './dialog.type';
-import DialogOverlay from '@/components/ui/dialog/DialogOverlay.vue';
-import { X } from 'lucide-vue-next';
-import DialogClose from '@/components/ui/dialog/DialogClose.vue';
 import DialogContent from '@/components/ui/dialog/DialogContent.vue';
-import DialogHeader from '@/components/ui/dialog/DialogHeader.vue';
 import DialogTitle from '@/components/ui/dialog/DialogTitle.vue';
-import DialogDescription from '@/components/ui/dialog/DialogDescription.vue';
 import Dialog from '@/components/ui/dialog/Dialog.vue';
+import { VisuallyHidden } from 'reka-ui';
 
-const dialogStack = ref<{ dialog: DialogType, id: number }[]>([]);
+const dialogStack = ref<{ dialog: DialogType, id: number, open: boolean }[]>([]);
 
-const closeDialog = (id: number) => {
-    dialogStack.value = dialogStack.value.filter(item => item.id !== id);
+const closeDialog = (id?: number) => {
+    if (id) {
+        const index = dialogStack.value.findIndex(item => item.id === id);
+        dialogStack.value[index].open = false;
+        setTimeout(() => {
+            dialogStack.value = dialogStack.value.filter(item => item.id !== id);
+        }, 200);
+    } else {
+        // close top dialog
+        const index = dialogStack.value.length - 1;
+        dialogStack.value[index].open = false;
+        setTimeout(() => {
+            dialogStack.value = dialogStack.value.filter(item => item.id !== dialogStack.value[index].id);
+        }, 200);
+    }
+
 };
 
 const openDialog = (dialog: DialogType) => {
@@ -21,30 +31,67 @@ const openDialog = (dialog: DialogType) => {
     dialogStack.value.push({
         id,
         dialog,
+        open: true,
     });
 
-    console.log(dialogStack.value);
     return () => {
         closeDialog(id);
     };
 };
 
+const closeAllDialogs = () => {
+    dialogStack.value.forEach(item => {
+        item.open = false;
+    });
+    setTimeout(() => {
+        dialogStack.value = [];
+    }, 200);
+};
+
 provide(DIALOG_CONTEXT_KEY, {
     openDialog,
+    closeDialog,
+    closeAllDialogs,
+    hasDialogOpen: () => {
+        return dialogStack.value.some(item => item.open);
+    },
 });
+
+onMounted(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+        console.log("ABC", dialogStack.value)
+        if (e.key === "Escape" && dialogStack.value.length > 0) {
+            // Force close the dialog immediately
+            const topDialog = dialogStack.value[dialogStack.value.length - 1];
+            topDialog.open = false;
+            setTimeout(() => {
+                dialogStack.value = dialogStack.value.filter(item => item.id !== topDialog.id);
+            }, 200);
+
+            // Prevent any other handlers from processing the event
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+        }
+    }
+
+    // Add the event listener with the highest priority
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown, true);
+})
 
 </script>
 
 <template>
     <slot />
-    <div class="dialog-holder">
-        <Dialog v-for="item in dialogStack" :key="item.id" class="dialog-item" :default-open="true" :modal="true">
-            <DialogContent>
-                <DialogHeader>
-                    <DialogTitle>{{ item.dialog.title }}</DialogTitle>
-                </DialogHeader>
-                <component :is="item.dialog.content" />
-            </DialogContent>
-        </Dialog>
-    </div>
+    <Dialog v-for="item in dialogStack" :key="item.id" class="dialog-item" v-model:open="item.open" :modal="true"
+        v-on:update:open="closeDialog(item.id)">
+        <DialogContent class="bg-transparent border-none shadow-none">
+            <VisuallyHidden>
+                <DialogTitle data-testid="dialog-title">{{ item.dialog.title }}</DialogTitle>
+            </VisuallyHidden>
+            <component :is="item.dialog.content" data-testid="dialog-content"
+                @close-dialog="() => closeDialog(item.id)" />
+        </DialogContent>
+    </Dialog>
 </template>

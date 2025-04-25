@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-8 rounded border border-muted/20 bg-block-background p-4">
+  <Card class="py-4 w-full">
     <div class="mb-4 flex items-center justify-between border-b border-muted/20 pb-4">
       <div class="flex items-center gap-2">
         <div class="h-3 w-3 rounded-full bg-[hsl(var(--love))]"></div>
@@ -25,15 +25,12 @@
         {{ output }}
       </div>
     </div>
-  </div>
+  </Card>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
-import { Marked } from 'marked';
-
-import { markedHighlight } from "marked-highlight";
-
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+import Card from './Card.vue';
 const props = defineProps({
   command: {
     type: String,

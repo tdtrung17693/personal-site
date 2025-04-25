@@ -20,6 +20,7 @@ export default defineConfig({
   integrations: [
     vue({
       jsx: true,
+      appEntrypoint: "./src/_app"
     }),
   ],
 });

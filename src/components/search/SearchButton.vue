@@ -1,6 +1,6 @@
 <template>
-    <button @click="showSearchDialog()"
-        class="flex items-center gap-2 px-3 py-1.5 rounded-sm border border-[hsl(var(--muted)/0.2)] bg-[hsl(var(--surface))] text-[hsl(var(--text))] transition-all duration-200 hover:bg-[hsl(var(--surface)/0.8)]"
+    <button @click="toggleSearchDialog()"
+        class="flex items-center gap-2 px-3 py-1.5 rounded border border-muted/30 bg-surface text-text transition-all duration-200 hover:bg-accent/10"
         aria-label="Search">
         <Search class="h-4 w-4" />
         <span class="hidden sm:inline">Search</span>
@@ -11,17 +11,32 @@
     </button>
 </template>
 <script setup lang="tsx">
-import { h, inject } from 'vue';
+import { h, inject, onMounted, ref } from 'vue';
 import { Search } from 'lucide-vue-next';
 import { useDialog } from '@/components/dialog/useDialog';
-import { DIALOG_CONTEXT_KEY, type DialogContext } from '@/components/dialog/dialog.type';
 import SearchDialog from './SearchDialog.vue';
-const { openDialog } = useDialog();
+const { openDialog, closeDialog, hasDialogOpen } = useDialog();
 
-const showSearchDialog = () => {
-    openDialog({
-        title: 'Search',
-        content: h(SearchDialog),
-    });
+const toggleSearchDialog = () => {
+    const isOpen = hasDialogOpen();
+    
+    if (isOpen) {
+        closeDialog();
+    } else {
+        openDialog({
+            title: 'Search',
+            content: h(SearchDialog),
+        });
+    }
 };
+onMounted(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+            e.preventDefault();
+            toggleSearchDialog();
+        }
+    }
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+})
 </script>

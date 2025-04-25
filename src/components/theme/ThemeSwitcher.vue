@@ -1,32 +1,15 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { getConfig } from '@/lib/utils';
-import { Sun, Moon } from 'lucide-vue-next';
+import { useThemeStore } from "./theme.store";
 
-const defaultTheme = getConfig('theme.defaultTheme');
-const currentTheme = ref(defaultTheme);
-console.log(currentTheme.value);
-
-function toggleTheme() {
-    currentTheme.value = currentTheme.value === 'light' ? 'dark' : 'light';
-    document.documentElement.classList.toggle('dark', currentTheme.value === 'dark');
-    localStorage.setItem('theme', currentTheme.value);
-}
-
-onMounted(() => {
-    // Check if user has a saved preference or use the config default
-    const savedTheme = localStorage.getItem('theme') || defaultTheme;
-    currentTheme.value = savedTheme;
-    document.documentElement.classList.toggle('dark', currentTheme.value === 'dark');
-});
+const theme = useThemeStore();
 </script>
 
 <template>
-    <button @click="toggleTheme" aria-label="Toggle theme"
-        class="p-2 rounded-md cursor-pointer dark:hover:bg-accent/20">
+    <button @click="theme.toggleTheme" aria-label="Toggle theme"
+        class="px-2 py-1.5 flex items-center gap-1.5 border border-muted/30 text-text bg-surface transition-all duration-200 rounded cursor-pointer dark:hover:bg-accent/20 min-w-24 flex justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-            :class="[currentTheme === 'dark' ? 'is-moon' : 'is-sun', 'theme-icon']">
+            :class="[theme.currentTheme === 'dark' ? 'is-moon' : 'is-sun', 'theme-icon']">
             <circle cx="12" cy="12" r="5" class="sun-circle" />
 
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" class="moon-crescent" />
@@ -40,5 +23,6 @@ onMounted(() => {
             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" class="sun-ray ray-3" />
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" class="sun-ray ray-7" />
         </svg>
+        <span class="text-xs uppercase">{{ theme.currentTheme }}</span>
     </button>
 </template>

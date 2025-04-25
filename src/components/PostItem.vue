@@ -1,5 +1,5 @@
 <template>
-  <a :href="`/blog/${post.slug}`"
+  <Card :as-link="true" :href="`/blog/${post.slug}`"
     class="group block border border-muted/20 bg-surface/60 p-4 transition-all hover:border-muted/50 hover:bg-surface/80">
     <div class="flex flex-col gap-2">
       <div class="flex items-center justify-between">
@@ -15,10 +15,11 @@
         </span>
       </div>
     </div>
-  </a>
+  </Card>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import Card from './Card.vue';
 defineProps({
   post: {
     type: Object,

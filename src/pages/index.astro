@@ -7,6 +7,6 @@ import PageLayout from "@/layouts/page.astro";
 // https://docs.astro.build/basics/astro-components/
 ---
 
-<PageLayout>
-  <PageHome client:visible />
+<PageLayout client:load>
+  <PageHome client:load />
 </PageLayout>

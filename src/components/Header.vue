@@ -10,22 +10,26 @@
       </div>
       <div class="flex items-center gap-4">
       </div>
-      <nav class="flex items-center gap-6 text-text/80  text-sm [&_a]:hover:text-primary">
-        <SearchButton />
+      <nav class="flex items-center gap-4 text-text/80  text-sm [&_a]:hover:text-primary [&_a]:outline-none [&_a]:transition-all [&_a]:duration-200 [&_a]:ease-in-out">
         <ThemeSwitcher />
+        <SearchButton />
         <div class="hidden sm:flex items-center gap-6">
           <a href="/me" :class="[
-            isActive('/me') && 'text-primary font-bold'
+            isActive('/me') && 'text-primary font-bold',
+            'focus:ring-2 focus:ring-foam/50 focus:ring-offset-2 focus:ring-offset-background'
           ]">
             /me
           </a>
           <a href="/projects" :class="[
-            isActive('/projects') && 'text-primary'
+            isActive('/projects') && 'text-primary',
+            'focus:ring-2 focus:ring-foam/50 focus:ring-offset-2 focus:ring-offset-background'
+
           ]">
             /projects
           </a>
           <a href="/notes" :class="[
-            isActive('/notes') && 'text-primary'
+            isActive('/notes') && 'text-primary',
+            'focus:ring-2 focus:ring-foam/50 focus:ring-offset-2 focus:ring-offset-background'
           ]">
             /notes
           </a>
@@ -36,7 +40,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
 import ThemeSwitcher from './theme/ThemeSwitcher.vue'
 import SearchButton from './search/SearchButton.vue'
 const isActive = (path) => {
