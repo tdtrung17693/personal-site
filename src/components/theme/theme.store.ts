@@ -1,10 +1,19 @@
 import { getConfig } from "@/lib/utils";
 import { defineStore } from "pinia";
+
+// Helper function to get initial theme and apply side effect
+function getInitialThemeAndApplyEffect() {
+  const theme = localStorage.getItem("theme") || getConfig("theme.defaultTheme");
+  // Apply the dark class immediately based on the initial theme
+  document.documentElement.classList.toggle("dark", theme === "dark");
+  return theme;
+}
+
 export const useThemeStore = defineStore("theme", {
   state: () => {
     return {
-      currentTheme:
-        localStorage.getItem("theme") || getConfig("theme.defaultTheme"),
+      // Use the helper function to initialize the state
+      currentTheme: getInitialThemeAndApplyEffect(),
     };
   },
   // could also be defined as

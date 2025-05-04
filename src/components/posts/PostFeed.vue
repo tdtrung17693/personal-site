@@ -8,7 +8,8 @@
     </div>
     <div class="border border-muted/20 bg-surface/50 p-4 text-center text-subtle"
         v-else-if="!loading && posts.length === 0">
-        <p>No posts found from this source.</p>
+        <p v-if="filter === 'all'">No posts found from any source.</p>
+        <p v-else>No posts found from this source.</p>
     </div>
     <div class="grid gap-4" v-else>
         <PostCard v-for="post in posts" :key="post.id" :post="post">

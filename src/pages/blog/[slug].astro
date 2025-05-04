@@ -1,0 +1,11 @@
+---
+import PageLayout from '@/layouts/page.astro'
+import PagePost from '@/components/pages/PagePost.vue'
+
+const { slug } = Astro.params;
+---
+
+<PageLayout >
+    <PagePost slug={slug} client:load />
+</PageLayout>
+

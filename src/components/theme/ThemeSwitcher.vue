@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import { useThemeStore } from "./theme.store";
 
 const theme = useThemeStore();
+
+theme.$subscribe((mutation) => {
+    console.log(mutation);
+});
+
 </script>
 
 <template>

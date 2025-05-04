@@ -10,7 +10,7 @@
     <div class="mt-2 flex flex-col gap-2">
         <span class="flex items-center gap-1 text-xs text-[hsl(var(--subtle))]">
             <Clock class="h-3 w-3" />
-            {{ post.readingTime }}
+            {{ calculateReadingTime(post.content) }}
         </span>
         <span class="text-xs text-[hsl(var(--subtle))] group-hover:text-[hsl(var(--pine))] mt-2">
             read_post<span class="text-[hsl(var(--pine))] group-hover:animate-pulse">_</span>
@@ -21,6 +21,7 @@
 <script setup lang="ts">
 import { Clock } from 'lucide-vue-next';
 import type { RegularPost } from '@/types/common';
+import { calculateReadingTime } from '@/lib/utils';
 
 defineProps<{
     post: RegularPost

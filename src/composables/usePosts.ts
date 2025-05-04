@@ -60,7 +60,7 @@ export function usePosts({
       }
 
       const result = await response.json();
-      posts.value = result.posts;
+      posts.value = [...(result.posts || []), ...posts.value];
       total.value = result.total;
       hasMore.value = result.hasMore;
       currentPage.value = page;

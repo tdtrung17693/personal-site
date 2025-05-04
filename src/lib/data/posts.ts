@@ -32,8 +32,6 @@ export const getPosts = async ({
     // Start building the query
     let query = db
       .selectFrom("posts")
-      .selectAll()
-      .where("status", "=", "published");
 
     // Apply source filter if not "all"
     if (!!source && source !== "all") {
@@ -42,7 +40,6 @@ export const getPosts = async ({
 
     // Get total count for pagination
     const totalQuery = query
-      .groupBy("id")
       .select((eb) => eb.fn.countAll().as("total"));
     const total = await totalQuery.executeTakeFirstOrThrow();
     const totalCount = Number(total.total);
@@ -55,7 +52,8 @@ export const getPosts = async ({
     query = query.offset(offset).limit(perPage);
 
     // Execute the query and transform the results to match Post type
-    const dbPosts = await query.execute();
+    
+    const dbPosts = await query.selectAll().execute();
     const posts: Post[] = dbPosts.map((post) => {
       const basePost = {
         id: post.id,
@@ -121,3 +119,30 @@ export const getPosts = async ({
     throw new Error("Failed to fetch posts");
   }
 };
+
+export const getPostBySlug = async ({ slug }: { slug: string }): Promise<Post | null> => {
+  const post = await db.selectFrom("posts").where("slug", "=", slug).selectAll().executeTakeFirst();
+  if (!post) return null;
+
+  console.log({
+    post,
+  });
+  if (post.source === "markdown") {
+    return {
+      id: post.id,
+      title: post.title,
+      date: post.published_at?.toISOString() || post.created_at.toISOString(),
+      slug: post.slug,
+      source: post.source,
+    sourceId: post.source_id?.replace(`${post.source}-`, "") || "",
+    sourceUrl: post.source_url || "",
+    tags: JSON.parse(post.tags?.replace(/^\{/g, "[").replace(/\}$/g, "]") || "[]"),
+    content: post.content || "",
+    excerpt: post.summary || "",
+      readingTime: (post.raw_metadata as any)?.readingTime || "0 min read",
+    } as RegularPost;
+  }
+
+  return null;
+};
+

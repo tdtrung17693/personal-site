@@ -3,6 +3,7 @@ import "@/styles/global.css";
 import "@/styles/terminal.css";
 import { getConfig } from "@/lib/utils";
 import AppLayout from "@/layouts/AppLayout.vue";
+import Analytics from '@vercel/analytics/astro'
 ---
 
 <html lang="en">
@@ -10,11 +11,17 @@ import AppLayout from "@/layouts/AppLayout.vue";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.css" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs" as="script" />
     <title>{getConfig("site.title")}</title>
+    <Analytics />
   </head>
-  <body class="text-text font-mono min-h-screen bg-base">
+  <body class="text-text font-mono min-h-screen bg-base flex flex-col">
     <AppLayout client:only>
       <slot />
     </AppLayout>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    </script>
   </body>
 </html>

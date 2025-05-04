@@ -1,77 +1,62 @@
-<template></template>
+<template>
+    <main class="container mx-auto px-4 py-12 md:px-6">
+        <a href="/" class="mb-8 inline-flex items-center gap-2 text-sm text-text hover:text-primary">
+            <span>←</span> cd ..
+        </a>
+
+        <Card class="mb-8 w-min">
+            <h1 class="text-2xl font-bold sm:text-3xl ">~/projects</h1>
+        </Card>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Card class="mt-8 flex flex-col" v-for="project in projects" :key="project.id">
+                <h3 class="text-lg font-bold text-text">{{ project.data.name }}</h3>
+                <div class="mt-2 text-sm text-subtle" v-html="project.rendered.html"></div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                    <span className="badge badge-foam" v-for="tag in project.data.tags" :key="tag">
+                        {{ tag }}
+                    </span>
+                </div>
+                <div class="mt-auto flex flex-wrap gap-2 pt-4" v-if="project.data.github || project.data.demo">
+                    <a :href="project.data.github" class="text-sm text-text flex items-center gap-2 hover:text-primary"
+                        v-if="project.data.github">
+                        <GitHubIcon class="w-4 h-4" />
+                        <span>github</span>
+                    </a>
+                    <a :href="project.data.demo" class="text-sm text-text flex items-center gap-2 hover:text-primary"
+                        v-if="project.data.demo">
+                        <ExternalLinkIcon stroke-width="1.5" class="w-4 h-4" />
+                        <span>demo</span>
+                    </a>
+                </div>
+            </Card>
+        </div>
+    </main>
+
+
+</template>
 
 <script setup lang="ts">
-const projects = [{
-    id: "personal-site",
-    title: "Personal Website",
-    description:
-        "A terminal-inspired personal website built with Next.js and TailwindCSS. Features a digital garden, blog aggregation from multiple sources, and activity tracking.",
-    technologies: ["Next.js", "TypeScript", "TailwindCSS", "React"],
-    links: {
-        demo: "https://tdtrung.tech",
-        github: "https://github.com/username/personal-site",
-    },
-    featured: true,
-},
-{
-    id: "note-taking-app",
-    title: "Digital Garden",
-    description:
-        "A note-taking application inspired by the Zettelkasten method. Supports bidirectional linking, markdown formatting, and knowledge graph visualization.",
-    technologies: ["React", "TypeScript", "IndexedDB", "D3.js"],
-    links: {
-        demo: "https://garden.tdtrung.tech",
-        github: "https://github.com/username/digital-garden",
-        details: "/projects/digital-garden",
-    },
-    featured: true,
-},
-{
-    id: "cli-tools",
-    title: "Developer CLI Tools",
-    description:
-        "A collection of command-line utilities to improve developer workflow. Includes tools for project scaffolding, git automation, and productivity tracking.",
-    technologies: ["Node.js", "Rust", "CLI"],
-    links: {
-        github: "https://github.com/username/dev-tools",
-    },
-    featured: false,
-},
-{
-    id: "markdown-editor",
-    title: "Markdown Editor",
-    description:
-        "A minimalist markdown editor with live preview, syntax highlighting, and keyboard shortcuts. Supports custom themes and export to multiple formats.",
-    technologies: ["Vue.js", "JavaScript", "Marked", "LocalStorage"],
-    links: {
-        demo: "https://markdown.tdtrung.tech",
-        github: "https://github.com/username/markdown-editor",
-    },
-    featured: false,
-},
-{
-    id: "api-dashboard",
-    title: "API Dashboard",
-    description:
-        "A dashboard for monitoring and testing API endpoints. Features request history, environment variables, and response visualization.",
-    technologies: ["React", "Redux", "Express", "MongoDB"],
-    links: {
-        github: "https://github.com/username/api-dashboard",
-    },
-    featured: false,
-},
-{
-    id: "code-snippets",
-    title: "Code Snippet Manager",
-    description:
-        "A web application for storing and organizing code snippets with syntax highlighting, tags, and search functionality.",
-    technologies: ["SvelteKit", "TypeScript", "Prisma", "PostgreSQL"],
-    links: {
-        demo: "https://snippets.tdtrung.tech",
-        github: "https://github.com/username/snippet-manager",
-    },
-    featured: true,
-},]
+import Card from "../Card.vue";
+import { ExternalLinkIcon } from "lucide-vue-next";
+import { GitHubIcon } from "vue3-simple-icons";
+interface Project {
+    id: string;
+    rendered: {
+        html: string;
+    };
+    data: {
+        name: string;
+        tags: string[];
+        description: string;
+        github: string;
+        demo?: string;
+    }
+    body: string;
+}
 
+const props = defineProps<{
+    projects: Project[]
+}>()
 
 </script>

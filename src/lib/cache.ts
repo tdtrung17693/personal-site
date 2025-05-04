@@ -23,7 +23,8 @@ export const withCacheResponse = async <T>(
   fn: () => Promise<T>,
   expiresIn: number = DEFAULT_EXPIRES_IN
 ): Promise<Response> => {
-  const { data, cached } = await withCache(key, fn, expiresIn);
+  try {
+    const { data, cached } = await withCache(key, fn, expiresIn);
 
   if (cached) {
     return new Response(data, {
@@ -38,7 +39,11 @@ export const withCacheResponse = async <T>(
     status: 200,
     headers: {
       "Content-Type": "application/json",
-      "X-Cache": "MISS",
-    },
-  });
+        "X-Cache": "MISS",
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    return new Response("Internal Server Error", { status: 500 });
+  }
 };

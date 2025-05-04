@@ -1,0 +1,11 @@
+---
+import "../styles/global.css";
+import { getCollection } from 'astro:content';
+import PageProjects from "@/components/pages/PageProjects.vue";
+import PageLayout from "@/layouts/page.astro";
+const projects = await getCollection('projects');
+---
+
+<PageLayout>
+    <PageProjects projects={projects} client:load/>
+</PageLayout>

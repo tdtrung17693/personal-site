@@ -5,6 +5,7 @@ export const prerender = false;
 const tweetApiBase = "https://react-tweet.vercel.app/api/tweet";
 
 type MediaDetails = {
+  media_url_https: string;
   media_url: string;
   video_info?: {
     variants: {
@@ -19,7 +20,7 @@ function extractMedia(mediaDetails?: MediaDetails) {
     return null;
   }
   return {
-    url: mediaDetails[0].media_url,
+    url: mediaDetails[0].media_url || mediaDetails[0].media_url_https,
     type: mediaDetails[0].video_info ? "video" : "image",
     videoUrl:
       mediaDetails[0].video_info?.variants.find(
@@ -44,11 +45,16 @@ export const GET: APIRoute = async (request) => {
       throw new Error("Failed to fetch tweet");
     }
     const { data } = tweet;
+
+    const displayTextRange = data.display_text_range;
     const quotedTweet = data.quoted_tweet
       ? {
           user: data.quoted_tweet.user.name,
           userHandle: data.quoted_tweet.user.screen_name,
-          text: data.quoted_tweet.text,
+          text: data.quoted_tweet.text.slice(
+            data.quoted_tweet.display_text_range[0] || 0,
+            data.quoted_tweet.display_text_range[1]
+          ),
           createdAt: data.quoted_tweet.created_at,
           id: data.quoted_tweet.id_str,
           media: extractMedia(data.quoted_tweet.mediaDetails),
@@ -62,7 +68,7 @@ export const GET: APIRoute = async (request) => {
       likes: data.favorite_count ?? 0,
       retweets: data.retweet_count ?? 0,
       replies: data.conversation_count ?? 0,
-      text: data.text,
+      text: data.text.slice(displayTextRange[0] || 0, displayTextRange[1]),
       createdAt: data.created_at,
       id: data.id_str,
       quotedTweet,

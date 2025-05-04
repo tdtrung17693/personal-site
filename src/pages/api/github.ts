@@ -5,11 +5,10 @@ import type { APIRoute } from "astro";
 // Initialize Redis client
 
 const getGitHubEventMessage = (event: any) => {
+  console.log(event);
   switch (event.type) {
     case "PushEvent":
-      return event.payload.commits[0].message;
-    case "IssueCommentEvent":
-      return event.payload.comment.body;
+      return event.payload.commits[0].message.split("\n")[0];
     case "IssuesEvent":
       return event.payload.issue.title;
     case "PullRequestEvent":
@@ -74,10 +73,20 @@ export const GET: APIRoute = async ({ request }) => {
       );
       const events = await response.json();
 
-      return events.map((event: any) => ({
-        id: event.id,
-        repo:
-          event.type === "ForkEvent"
+      return events
+        .filter((e: any) => [
+          "PushEvent",
+          "CreateEvent",
+          "ForkEvent",
+          "IssuesEvent",
+          "PullRequestEvent",
+          "WatchEvent",
+          "ReleaseEvent",
+        ].includes(e.type))
+        .map((event: any) => ({
+          id: event.id,
+          repo:
+            event.type === "ForkEvent"
             ? event.payload.forkee.full_name
             : event.repo.name,
         action: getGitHubEventType(event.type),

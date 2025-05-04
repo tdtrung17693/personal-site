@@ -10,7 +10,8 @@
       </div>
       <div class="flex items-center gap-4">
       </div>
-      <nav class="flex items-center gap-4 text-text/80  text-sm [&_a]:hover:text-primary [&_a]:outline-none [&_a]:transition-all [&_a]:duration-200 [&_a]:ease-in-out">
+      <nav
+        class="flex items-center gap-4 text-text/80  text-sm [&_a]:hover:text-primary [&_a]:outline-none [&_a]:transition-all [&_a]:duration-200 [&_a]:ease-in-out">
         <ThemeSwitcher />
         <SearchButton />
         <div class="hidden sm:flex items-center gap-6">
@@ -27,12 +28,12 @@
           ]">
             /projects
           </a>
-          <a href="/notes" :class="[
+          <!-- <a href="/notes" :class="[
             isActive('/notes') && 'text-primary',
             'focus:ring-2 focus:ring-foam/50 focus:ring-offset-2 focus:ring-offset-background'
           ]">
             /notes
-          </a>
+          </a> -->
         </div>
       </nav>
     </div>

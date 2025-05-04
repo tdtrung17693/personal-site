@@ -73,3 +73,9 @@ export function getConfig(path: string, defaultValue?: any): any {
 
   return result;
 }
+
+export function calculateReadingTime(text: string) {
+  const wordsPerMinute = 200;
+  const wordCount = text.split(/\s+/).filter(Boolean).length;
+  return Math.ceil(wordCount / wordsPerMinute);
+}
