@@ -4,22 +4,22 @@
  */
 
 interface EnvVars {
-  PUBLIC_SITE_URL: string;
-  PUBLIC_SITE_EMAIL: string;
-  PUBLIC_API_URL?: string;
-  PUBLIC_ANALYTICS_ID?: string;
-  PUBLIC_SITE_TITLE: string;
-  PUBLIC_SITE_DESCRIPTION: string;
-  DATABASE_URL: string;
-  PUBLIC_GITHUB_USERNAME: string;
-  GITHUB_TOKEN: string;
-  PUBLIC_TWITTER_USERNAME: string;
-  PUBLIC_GITHUB_ACTIVITY_ENABLED: boolean;
+  VITE_PUBLIC_SITE_URL: string;
+  VITE_PUBLIC_SITE_EMAIL: string;
+  VITE_PUBLIC_API_URL?: string;
+  VITE_PUBLIC_ANALYTICS_ID?: string;
+  VITE_PUBLIC_SITE_TITLE: string;
+  VITE_PUBLIC_SITE_DESCRIPTION: string;
+  VITE_DATABASE_URL: string;
+  VITE_PUBLIC_GITHUB_USERNAME: string;
+  VITE_GITHUB_TOKEN: string;
+  VITE_PUBLIC_TWITTER_USERNAME: string;
+  VITE_PUBLIC_GITHUB_ACTIVITY_ENABLED: boolean;
 }
 
 // Default values for environment variables
 const defaults: Partial<EnvVars> = {
-  PUBLIC_SITE_URL: "http://localhost:4321",
+  VITE_PUBLIC_SITE_URL: "http://localhost:4321",
 };
 
 /**
