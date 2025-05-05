@@ -54,14 +54,14 @@ const config: AppConfig = {
   },
   github: {
     username: getEnv("VITE_PUBLIC_GITHUB_USERNAME"),
-    token: getEnv("VITE_GITHUB_TOKEN"),
+    token: getEnv("GITHUB_TOKEN"),
   },
   twitter: {
     username: getEnv("VITE_PUBLIC_TWITTER_USERNAME"),
   },
   ...(typeof window === "undefined" && {
     database: {
-      url: getEnv("VITE_DATABASE_URL"),
+      url: getEnv("DATABASE_URL"),
     },
   }),
 };
