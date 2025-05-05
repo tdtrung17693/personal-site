@@ -36,28 +36,28 @@ export interface AppConfig {
 
 const config: AppConfig = {
   site: {
-    title: getEnv("PUBLIC_SITE_TITLE") || "Personal Site",
-    description: getEnv("PUBLIC_SITE_DESCRIPTION") || "Personal Site",
-    url: getEnv("PUBLIC_SITE_URL") || "http://localhost:4321",
-    email: getEnv("PUBLIC_SITE_EMAIL") || "trandinhtrung176@gmail.com",
+    title: getEnv("VITE_PUBLIC_SITE_TITLE") || "Personal Site",
+    description: getEnv("VITE_PUBLIC_SITE_DESCRIPTION") || "Personal Site",
+    url: getEnv("VITE_PUBLIC_SITE_URL") || "http://localhost:4321",
+    email: getEnv("VITE_PUBLIC_SITE_EMAIL") || "trandinhtrung176@gmail.com",
   },
   api: {
-    url: getEnv("PUBLIC_API_URL") || "http://localhost:4321/api/",
+    url: getEnv("VITE_PUBLIC_API_URL") || "http://localhost:4321/api/",
   },
   theme: {
     defaultTheme: "light",
   },
   features: {
     // Only enable analytics in production
-    enableAnalytics: !isDev() && Boolean(getEnv("PUBLIC_ANALYTICS_ID")),
-    enableGithubActivity: ["true", "1"].includes(getEnv("PUBLIC_GITHUB_ACTIVITY_ENABLED")) ? true : false,
+    enableAnalytics: !isDev() && Boolean(getEnv("VITE_PUBLIC_ANALYTICS_ID")),
+    enableGithubActivity: ["true", "1"].includes(getEnv("VITE_PUBLIC_GITHUB_ACTIVITY_ENABLED")) ? true : false,
   },
   github: {
-    username: getEnv("PUBLIC_GITHUB_USERNAME"),
+    username: getEnv("VITE_PUBLIC_GITHUB_USERNAME"),
     token: getEnv("GITHUB_TOKEN"),
   },
   twitter: {
-    username: getEnv("PUBLIC_TWITTER_USERNAME"),
+    username: getEnv("VITE_PUBLIC_TWITTER_USERNAME"),
   },
   ...(typeof window === "undefined" && {
     database: {
@@ -67,7 +67,7 @@ const config: AppConfig = {
 };
 
 // Only add API configuration if the URL is defined
-const apiUrl = getEnv("PUBLIC_API_URL");
+const apiUrl = getEnv("VITE_PUBLIC_API_URL");
 if (apiUrl) {
   config.api = {
     url: apiUrl,

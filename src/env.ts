@@ -17,17 +17,17 @@ export const env = createEnv({
    * Client-side variables. Must be prefixed with VITE_.
    * Exposed to the client bundle.
    */
-  clientPrefix: "PUBLIC_",
+  clientPrefix: "VITE_PUBLIC_",
   client: {
-    PUBLIC_SITE_URL: z.string().url().default("http://localhost:4321"), // Added default
-    PUBLIC_SITE_EMAIL: z.string().email({ message: "PUBLIC_SITE_EMAIL must be a valid email"}),
-    PUBLIC_API_URL: z.string().url({ message: "PUBLIC_API_URL must be a valid URL" }).optional(), // Optional
-    PUBLIC_ANALYTICS_ID: z.string().min(1).optional(), // Optional
-    PUBLIC_SITE_TITLE: z.string().min(1, { message: "PUBLIC_SITE_TITLE is required"}),
-    PUBLIC_SITE_DESCRIPTION: z.string().min(1, { message: "PUBLIC_SITE_DESCRIPTION is required"}),
-    PUBLIC_GITHUB_USERNAME: z.string().min(1, { message: "PUBLIC_GITHUB_USERNAME is required"}),
-    PUBLIC_TWITTER_USERNAME: z.string().min(1, { message: "PUBLIC_TWITTER_USERNAME is required"}),
-    PUBLIC_GITHUB_ACTIVITY_ENABLED: z.coerce.string(), // Use custom boolean parser
+    VITE_PUBLIC_SITE_URL: z.string().url().default("http://localhost:4321"), // Added default
+    VITE_PUBLIC_SITE_EMAIL: z.string().email({ message: "VITE_PUBLIC_SITE_EMAIL must be a valid email"}),
+    VITE_PUBLIC_API_URL: z.string().url({ message: "VITE_PUBLIC_API_URL must be a valid URL" }).optional(), // Optional
+    VITE_PUBLIC_ANALYTICS_ID: z.string().min(1).optional(), // Optional
+    VITE_PUBLIC_SITE_TITLE: z.string().min(1, { message: "VITE_PUBLIC_SITE_TITLE is required"}),
+    VITE_PUBLIC_SITE_DESCRIPTION: z.string().min(1, { message: "VITE_PUBLIC_SITE_DESCRIPTION is required"}),
+    VITE_PUBLIC_GITHUB_USERNAME: z.string().min(1, { message: "VITE_PUBLIC_GITHUB_USERNAME is required"}),
+    VITE_PUBLIC_TWITTER_USERNAME: z.string().min(1, { message: "VITE_PUBLIC_TWITTER_USERNAME is required"}),
+    VITE_PUBLIC_GITHUB_ACTIVITY_ENABLED: z.coerce.string(), // Use custom boolean parser
   },
 
   /**
@@ -41,15 +41,15 @@ export const env = createEnv({
     // NODE_ENV: process.env.NODE_ENV,
 
     // Client (Vite import.meta.env)
-    PUBLIC_SITE_URL: process.env.PUBLIC_SITE_URL || import.meta.env.PUBLIC_SITE_URL ,
-    PUBLIC_SITE_EMAIL: process.env.PUBLIC_SITE_EMAIL || import.meta.env.PUBLIC_SITE_EMAIL,
-    PUBLIC_API_URL: process.env.PUBLIC_API_URL || import.meta.env.PUBLIC_API_URL,
-    PUBLIC_ANALYTICS_ID: process.env.PUBLIC_ANALYTICS_ID || import.meta.env.PUBLIC_ANALYTICS_ID,
-    PUBLIC_SITE_TITLE: process.env.PUBLIC_SITE_TITLE || import.meta.env.PUBLIC_SITE_TITLE,
-    PUBLIC_SITE_DESCRIPTION: process.env.PUBLIC_SITE_DESCRIPTION || import.meta.env.PUBLIC_SITE_DESCRIPTION,
-    PUBLIC_GITHUB_USERNAME: process.env.PUBLIC_GITHUB_USERNAME || import.meta.env.PUBLIC_GITHUB_USERNAME,
-    PUBLIC_TWITTER_USERNAME: process.env.PUBLIC_TWITTER_USERNAME || import.meta.env.PUBLIC_TWITTER_USERNAME,
-    PUBLIC_GITHUB_ACTIVITY_ENABLED: process.env.PUBLIC_GITHUB_ACTIVITY_ENABLED || import.meta.env.PUBLIC_GITHUB_ACTIVITY_ENABLED,
+    VITE_PUBLIC_SITE_URL: process.env.VITE_PUBLIC_SITE_URL || import.meta.env.VITE_PUBLIC_SITE_URL ,
+    VITE_PUBLIC_SITE_EMAIL: process.env.VITE_PUBLIC_SITE_EMAIL || import.meta.env.VITE_PUBLIC_SITE_EMAIL,
+    VITE_PUBLIC_API_URL: process.env.VITE_PUBLIC_API_URL || import.meta.env.VITE_PUBLIC_API_URL,
+    VITE_PUBLIC_ANALYTICS_ID: process.env.VITE_PUBLIC_ANALYTICS_ID || import.meta.env.VITE_PUBLIC_ANALYTICS_ID,
+    VITE_PUBLIC_SITE_TITLE: process.env.VITE_PUBLIC_SITE_TITLE || import.meta.env.VITE_PUBLIC_SITE_TITLE,
+    VITE_PUBLIC_SITE_DESCRIPTION: process.env.VITE_PUBLIC_SITE_DESCRIPTION || import.meta.env.VITE_PUBLIC_SITE_DESCRIPTION,
+    VITE_PUBLIC_GITHUB_USERNAME: process.env.VITE_PUBLIC_GITHUB_USERNAME || import.meta.env.VITE_PUBLIC_GITHUB_USERNAME,
+    VITE_PUBLIC_TWITTER_USERNAME: process.env.VITE_PUBLIC_TWITTER_USERNAME || import.meta.env.VITE_PUBLIC_TWITTER_USERNAME,
+    VITE_PUBLIC_GITHUB_ACTIVITY_ENABLED: process.env.VITE_PUBLIC_GITHUB_ACTIVITY_ENABLED || import.meta.env.VITE_PUBLIC_GITHUB_ACTIVITY_ENABLED,
   },
 
   /**
