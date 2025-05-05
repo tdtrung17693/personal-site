@@ -2,15 +2,6 @@ import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
 // Helper function to parse boolean env vars (e.g., "true", "1", "false", "0")
-const zodBoolean = z.coerce.string()
-  .transform((val) => {
-    const lowerVal = val.toLowerCase();
-    if (lowerVal === 'true' || lowerVal === '1') return true;
-    if (lowerVal === 'false' || lowerVal === '0') return false;
-    throw new Error(`Invalid boolean value: ${val}`);
-  })
-  .pipe(z.boolean());
-
 export const env = createEnv({
   /**
    * Server-side variables. Not prefixed with VITE_.
@@ -36,7 +27,7 @@ export const env = createEnv({
     VITE_PUBLIC_SITE_DESCRIPTION: z.string().min(1, { message: "VITE_PUBLIC_SITE_DESCRIPTION is required"}),
     VITE_PUBLIC_GITHUB_USERNAME: z.string().min(1, { message: "VITE_PUBLIC_GITHUB_USERNAME is required"}),
     VITE_PUBLIC_TWITTER_USERNAME: z.string().min(1, { message: "VITE_PUBLIC_TWITTER_USERNAME is required"}),
-    VITE_PUBLIC_GITHUB_ACTIVITY_ENABLED: zodBoolean, // Use custom boolean parser
+    VITE_PUBLIC_GITHUB_ACTIVITY_ENABLED: z.coerce.string(), // Use custom boolean parser
   },
 
   /**

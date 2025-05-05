@@ -50,7 +50,7 @@ const config: AppConfig = {
   features: {
     // Only enable analytics in production
     enableAnalytics: !isDev() && Boolean(getEnv("VITE_PUBLIC_ANALYTICS_ID")),
-    enableGithubActivity: Boolean(getEnv("VITE_PUBLIC_GITHUB_ACTIVITY_ENABLED")),
+    enableGithubActivity: ["true", "1"].includes(getEnv("VITE_PUBLIC_GITHUB_ACTIVITY_ENABLED")) ? true : false,
   },
   github: {
     username: getEnv("VITE_PUBLIC_GITHUB_USERNAME"),
