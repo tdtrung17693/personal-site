@@ -4,7 +4,7 @@ import { ref, onMounted, computed, watch } from 'vue'
 import { Heart, MessageCircle, RefreshCw, Clock } from 'lucide-vue-next'
 import { marked, type Tokens } from 'marked'
 import type { Post } from '@/types/common'
-import { env } from '@/env'
+import { getConfig } from "@/lib/utils"
 
 // --- Helper Functions ---
 
@@ -45,7 +45,7 @@ onMounted(() => {
 onMounted(async () => {
     try {
         loading.value = true;
-        const response = await fetch(`${env.VITE_PUBLIC_API_URL}/posts/${props.slug}`)
+        const response = await fetch(`${getConfig("api.url")}/posts/${props.slug}`)
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
