@@ -2,7 +2,7 @@ import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
 // Helper function to parse boolean env vars (e.g., "true", "1", "false", "0")
-const zodBoolean = z.string()
+const zodBoolean = z.coerce.string()
   .transform((val) => {
     const lowerVal = val.toLowerCase();
     if (lowerVal === 'true' || lowerVal === '1') return true;
