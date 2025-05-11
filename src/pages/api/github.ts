@@ -75,6 +75,7 @@ export const GET: APIRoute = async ({ request }) => {
       const events = await response.json();
 
       return events
+        .slice(0, 5)
         .filter((e: any) =>
           [
             "PushEvent",

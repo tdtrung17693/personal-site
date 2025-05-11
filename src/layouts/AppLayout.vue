@@ -12,7 +12,7 @@
         </footer>
         <VimNavigation />
     </DialogHolder>
-
+    <Analytics />
 </template>
 
 <script setup lang="ts">
@@ -20,4 +20,5 @@ import DialogHolder from "@/components/dialog/DialogHolder.vue";
 import Header from "@/components/Header.vue";
 import VimNavigation from "@/components/vim/VimNavigation.vue";
 import { getConfig } from "@/lib/config/client.config";
+import { Analytics } from "@vercel/analytics/vue";
 </script>
