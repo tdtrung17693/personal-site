@@ -825,3 +825,16 @@ button {
   line-height: 1.25rem;
   color: hsl(var(--subtle));
 }
+
+.prose {
+  --tw-prose-bold: hsl(var(--text));
+  --tw-prose-links: hsl(var(--foam) / 0.8);
+  --tw-prose-link-hover: hsl(var(--foam));
+  --tw-prose-code: hsl(var(--foam));
+  --tw-prose-code-bg: hsl(var(--surface));
+  --tw-prose-code-inline: hsl(var(--foam));
+  --tw-prose-code-inline-bg: hsl(var(--surface));
+  --tw-prose-code-block: hsl(var(--foam));
+  --tw-prose-body: hsl(var(--text) / 0.8);
+  --tw-prose-headings: hsl(var(--text));
+}
