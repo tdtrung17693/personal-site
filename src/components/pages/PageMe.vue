@@ -54,7 +54,7 @@
 
 <script setup lang="ts">
 import Terminal from "@/components/Terminal.vue"
-import { getConfig } from "@/lib/utils"
+import { getConfig } from "@/lib/config/client.config"
 import Card from "../Card.vue"
 
 const githubUsername = getConfig("github.username")

@@ -1,5 +1,5 @@
 import type { GithubEvent } from "@/types/common";
-import { getConfig } from "./utils";
+import { getConfig } from "./config/client.config";
 
 export const getGithubActivity = async (): Promise<GithubEvent[]> => {
   // Simulate API delay

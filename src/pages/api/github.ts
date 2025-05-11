@@ -1,5 +1,5 @@
 import { withCacheResponse } from "@/lib/cache";
-import { getConfig } from "@/lib/utils";
+import { getConfig } from "@/lib/config/server.config";
 import type { APIRoute } from "astro";
 
 // Initialize Redis client
@@ -74,25 +74,27 @@ export const GET: APIRoute = async ({ request }) => {
       const events = await response.json();
 
       return events
-        .filter((e: any) => [
-          "PushEvent",
-          "CreateEvent",
-          "ForkEvent",
-          "IssuesEvent",
-          "PullRequestEvent",
-          "WatchEvent",
-          "ReleaseEvent",
-        ].includes(e.type))
+        .filter((e: any) =>
+          [
+            "PushEvent",
+            "CreateEvent",
+            "ForkEvent",
+            "IssuesEvent",
+            "PullRequestEvent",
+            "WatchEvent",
+            "ReleaseEvent",
+          ].includes(e.type)
+        )
         .map((event: any) => ({
           id: event.id,
           repo:
             event.type === "ForkEvent"
-            ? event.payload.forkee.full_name
-            : event.repo.name,
-        action: getGitHubEventType(event.type),
-        message: getGitHubEventMessage(event),
-        date: event.created_at,
-      }));
+              ? event.payload.forkee.full_name
+              : event.repo.name,
+          action: getGitHubEventType(event.type),
+          message: getGitHubEventMessage(event),
+          date: event.created_at,
+        }));
     });
   } catch (error) {
     console.error(error);

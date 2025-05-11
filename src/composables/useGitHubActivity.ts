@@ -1,4 +1,4 @@
-import { getConfig } from "@/lib/utils";
+import { getConfig } from "@/lib/config/client.config";
 import type { GithubEvent } from "@/types/common";
 import { ref } from "vue";
 

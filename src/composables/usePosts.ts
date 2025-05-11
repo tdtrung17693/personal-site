@@ -1,4 +1,4 @@
-import { getConfig } from "@/lib/utils";
+import { getConfig } from "@/lib/config/client.config";
 import type { Post } from "@/types/common";
 import { computed, ref, type ComputedRef, type Ref } from "vue";
 interface UsePostsOptions {

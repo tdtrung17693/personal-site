@@ -111,7 +111,7 @@ import GithubActivity from '@/components/GitHubActivity.vue';
 import PostFeed from '@/components/posts/PostFeed.vue';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { GitHubIcon, XIcon } from 'vue3-simple-icons';
-import { getConfig } from '@/lib/utils';
+import { getConfig } from '@/lib/config/client.config';
 const currentDate = ref<string | undefined>(undefined);
 
 onMounted(() => {

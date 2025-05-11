@@ -1,0 +1,105 @@
+/**
+ * Application configuration
+ * This file centralizes all configuration settings for the application
+ */
+
+import {
+  PUBLIC_ANALYTICS_ID,
+  PUBLIC_API_URL,
+  PUBLIC_GITHUB_ACTIVITY_ENABLED,
+  PUBLIC_GITHUB_USERNAME,
+  PUBLIC_SITE_DESCRIPTION,
+  PUBLIC_SITE_EMAIL,
+  PUBLIC_SITE_URL,
+  PUBLIC_TWITTER_USERNAME,
+} from "astro:env/client";
+import type { GetConfig, GetConfigWithDefault } from "../utils";
+export interface AppClientConfig {
+  site: {
+    title: string;
+    description: string;
+    url: string;
+    email: string;
+  };
+  theme: {
+    defaultTheme: "light" | "dark";
+  };
+  features: {
+    enableAnalytics: boolean;
+    enableGithubActivity: boolean;
+  };
+
+  api: {
+    url: string;
+  };
+  github?: {
+    username: string;
+  };
+  twitter?: {
+    username: string;
+  };
+}
+
+const config: AppClientConfig = {
+  site: {
+    title: "Trung Tran's Personal Site",
+    description: PUBLIC_SITE_DESCRIPTION || "Personal Site",
+    url: PUBLIC_SITE_URL || "http://localhost:4321",
+    email: PUBLIC_SITE_EMAIL || "trandinhtrung176@gmail.com",
+  },
+  api: {
+    url: PUBLIC_API_URL || "http://localhost:4321/api/",
+  },
+  theme: {
+    defaultTheme: "light",
+  },
+  features: {
+    // Only enable analytics in production
+    enableAnalytics: Boolean(PUBLIC_ANALYTICS_ID),
+    enableGithubActivity: ["true", "1"].includes(
+      PUBLIC_GITHUB_ACTIVITY_ENABLED || "false"
+    )
+      ? true
+      : false,
+  },
+  github: {
+    username: PUBLIC_GITHUB_USERNAME || "",
+  },
+  twitter: {
+    username: PUBLIC_TWITTER_USERNAME || "",
+  },
+};
+
+// Only add API configuration if the URL is defined
+const apiUrl = PUBLIC_API_URL;
+if (apiUrl) {
+  config.api = {
+    url: apiUrl,
+  };
+}
+
+export default config;
+
+export const getConfig: GetConfig<AppClientConfig> = (key: string) => {
+  if (!key) return undefined;
+
+  const keys = key.split(".");
+  let result: any = config;
+
+  for (const k of keys) {
+    if (result && typeof result === "object" && k in result) {
+      result = result[k];
+    } else {
+      return undefined;
+    }
+  }
+
+  return result;
+};
+
+export const getConfigWithDefault: GetConfigWithDefault<AppClientConfig> = (
+  key,
+  defaultVal
+) => {
+  return getConfig(key) || defaultVal;
+};

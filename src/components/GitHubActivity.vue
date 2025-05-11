@@ -43,7 +43,7 @@ import { ref, onMounted, h } from 'vue';
 import { GitBranch, GitCommit, GitPullRequest, GitFork, Star, Plus, Tag } from 'lucide-vue-next';
 import { getGithubActivity } from "@/lib/activity"
 import type { GithubEvent } from '@/types/common';
-import { getConfig } from '@/lib/utils';
+import { getConfig } from '@/lib/config/client.config';
 import { useGitHubActivity } from '@/composables/useGitHubActivity';
 
 const { activity, loading, error } = useGitHubActivity();

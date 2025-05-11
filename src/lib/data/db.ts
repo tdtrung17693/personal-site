@@ -1,6 +1,6 @@
 import { Kysely, PostgresDialect } from "kysely";
 import pg from "pg";
-import { getConfig } from "../utils";
+import { getConfig } from "../config/server.config";
 import type { Database } from "./db.type";
 const dbUrl = getConfig("database.url");
 
@@ -10,5 +10,5 @@ const pool = new pg.Pool({
 });
 
 export const db = new Kysely<Database>({
-  dialect: new PostgresDialect({ pool, }),
+  dialect: new PostgresDialect({ pool }),
 });

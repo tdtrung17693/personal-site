@@ -4,7 +4,7 @@ import { ref, onMounted, computed, watch } from 'vue'
 import { Heart, MessageCircle, RefreshCw, Clock } from 'lucide-vue-next'
 import { marked, type Tokens } from 'marked'
 import type { Post } from '@/types/common'
-import { getConfig } from "@/lib/utils"
+import { getConfig } from "@/lib/config/client.config"
 
 // --- Helper Functions ---
 
