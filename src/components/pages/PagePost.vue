@@ -250,19 +250,15 @@ const getSourceClass = (source: string | undefined) => {
 
 
                 <!-- Content Area -->
-                <div class="prose prose-invert max-w-none pt-6 text-text">
+                <div class="prose  max-w-none pt-6 text-text">
                     <!-- Markdown Content -->
                     <div v-if="post.source === 'markdown' && 'content' in post">
                         <!-- v-html now uses the computed renderedMarkdown which includes mermaid SVGs -->
-                        <div class="prose prose-invert max-w-none" v-if="renderedMarkdown" v-html="renderedMarkdown">
+                        <div class="prose max-w-none" v-if="renderedMarkdown" v-html="renderedMarkdown">
                         </div>
                         <div v-else-if="!isMermaidRendering" class="text-muted">
                             <!-- Show only if not loading mermaid specifically -->
                             Processing content...
-                        </div>
-                        <div class="mt-4 flex items-center gap-2 text-sm text-subtle not-prose">
-                            <Clock class="h-4 w-4" />
-                            <span>{{ post.readingTime }}</span>
                         </div>
                     </div>
 
