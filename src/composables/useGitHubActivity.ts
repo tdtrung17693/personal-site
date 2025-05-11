@@ -9,7 +9,9 @@ export function useGitHubActivity() {
 
   const fetchActivity = async () => {
     loading.value = true;
-    const response = await fetch(`${getConfig("api.url")}github`);
+    const response = await fetch(`${getConfig("api.url")}github`, {
+      redirect: "follow",
+    });
     const data = await response.json();
     activity.value = data;
     loading.value = false;

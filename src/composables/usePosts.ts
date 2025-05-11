@@ -52,7 +52,10 @@ export function usePosts({
       });
 
       const response = await fetch(
-        `${getConfig("api.url")}posts?${params.toString()}`
+        `${getConfig("api.url")}posts?${params.toString()}`,
+        {
+          redirect: "follow",
+        }
       );
 
       if (!response.ok) {

@@ -69,6 +69,7 @@ export const GET: APIRoute = async ({ request }) => {
           headers: {
             Authorization: `Bearer ${getConfig("github.token")}`,
           },
+          redirect: "follow",
         }
       );
       const events = await response.json();
