@@ -1,10 +1,8 @@
+import type { APIContext } from "astro";
+
 const ALLOWED_ORIGINS = ["trungtran.space", "*.trungtran.space"];
-export async function corsMiddleware(
-  {
-    request,
-  }: {
-    request: Request;
-  },
+export async function onRequest(
+  { request }: APIContext,
   next: () => Promise<Response>
 ) {
   if (request.method === "OPTIONS") {
