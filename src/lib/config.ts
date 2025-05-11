@@ -2,8 +2,18 @@
  * Application configuration
  * This file centralizes all configuration settings for the application
  */
-import { getEnv, isDev } from "./env";
 
+import {
+  PUBLIC_ANALYTICS_ID,
+  PUBLIC_API_URL,
+  PUBLIC_GITHUB_ACTIVITY_ENABLED,
+  PUBLIC_GITHUB_USERNAME,
+  PUBLIC_SITE_DESCRIPTION,
+  PUBLIC_SITE_EMAIL,
+  PUBLIC_SITE_URL,
+  PUBLIC_TWITTER_USERNAME,
+} from "astro:env/client";
+import { DATABASE_URL, GITHUB_TOKEN } from "astro:env/server";
 export interface AppConfig {
   site: {
     title: string;
@@ -36,38 +46,42 @@ export interface AppConfig {
 
 const config: AppConfig = {
   site: {
-    title: getEnv("VITE_PUBLIC_SITE_TITLE") || "Personal Site",
-    description: getEnv("VITE_PUBLIC_SITE_DESCRIPTION") || "Personal Site",
-    url: getEnv("VITE_PUBLIC_SITE_URL") || "http://localhost:4321",
-    email: getEnv("VITE_PUBLIC_SITE_EMAIL") || "trandinhtrung176@gmail.com",
+    title: "Trung Tran's Personal Site",
+    description: PUBLIC_SITE_DESCRIPTION || "Personal Site",
+    url: PUBLIC_SITE_URL || "http://localhost:4321",
+    email: PUBLIC_SITE_EMAIL || "trandinhtrung176@gmail.com",
   },
   api: {
-    url: getEnv("VITE_PUBLIC_API_URL") || "http://localhost:4321/api/",
+    url: PUBLIC_API_URL || "http://localhost:4321/api/",
   },
   theme: {
     defaultTheme: "light",
   },
   features: {
     // Only enable analytics in production
-    enableAnalytics: !isDev() && Boolean(getEnv("VITE_PUBLIC_ANALYTICS_ID")),
-    enableGithubActivity: ["true", "1"].includes(getEnv("VITE_PUBLIC_GITHUB_ACTIVITY_ENABLED")) ? true : false,
+    enableAnalytics: Boolean(PUBLIC_ANALYTICS_ID),
+    enableGithubActivity: ["true", "1"].includes(
+      PUBLIC_GITHUB_ACTIVITY_ENABLED || "false"
+    )
+      ? true
+      : false,
   },
   github: {
-    username: getEnv("VITE_PUBLIC_GITHUB_USERNAME"),
-    token: getEnv("GITHUB_TOKEN"),
+    username: PUBLIC_GITHUB_USERNAME || "",
+    token: GITHUB_TOKEN || "",
   },
   twitter: {
-    username: getEnv("VITE_PUBLIC_TWITTER_USERNAME"),
+    username: PUBLIC_TWITTER_USERNAME || "",
   },
   ...(typeof window === "undefined" && {
     database: {
-      url: getEnv("DATABASE_URL"),
+      url: DATABASE_URL,
     },
   }),
 };
 
 // Only add API configuration if the URL is defined
-const apiUrl = getEnv("VITE_PUBLIC_API_URL");
+const apiUrl = PUBLIC_API_URL;
 if (apiUrl) {
   config.api = {
     url: apiUrl,
