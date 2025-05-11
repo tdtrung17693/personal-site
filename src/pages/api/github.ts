@@ -64,7 +64,7 @@ export const GET: APIRoute = async ({ request }) => {
       const response = await fetch(
         `https://api.github.com/users/${getConfig(
           "github.username"
-        )}/events/public`,
+        )}/events/public?per_page=5`,
         {
           headers: {
             Authorization: `Bearer ${getConfig("github.token")}`,
