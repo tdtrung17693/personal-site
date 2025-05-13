@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import dayjs from 'dayjs'
 import mermaid from "mermaid"
 import { ref, onMounted, computed, watch } from 'vue'
-import { Heart, MessageCircle, RefreshCw, Clock } from 'lucide-vue-next'
 import { marked, type Tokens } from 'marked'
 import type { Post } from '@/types/common'
 import { getConfig } from "@/lib/config/client.config"
@@ -232,7 +232,7 @@ const getSourceClass = (source: string | undefined) => {
 
                 <div class="mb-8 flex items-center justify-between">
                     <time :datetime="post.date" class="text-xs text-muted">
-                        {{ post.date }}
+                        {{ dayjs(post.date).format('DD MMM YYYY') }}
                     </time>
                     <!-- Only show source type for non-markdown posts -->
                     <div v-if="post.source !== 'markdown'" :class="['font-bold text-xs', getSourceClass(post.source)]">
